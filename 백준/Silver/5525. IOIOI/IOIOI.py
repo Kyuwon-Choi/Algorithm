@@ -6,19 +6,20 @@ N = int(input())
 M = int(input())
 S = input()
 
-P= "IO"*N +"I"
-cnt=0
-tmp=0
-for _ in range(M-(2*N+1)+1):
-    if P not in S:
-        break
-    index = S.find(P, tmp)
-    if index == -1:
-        break
-    tmp=index+2
-    cnt += 1
+cnt, index, ans = 0, 0, 0
 
-print(cnt)
+while index < (M-1):
+    if S[index:index+3] == "IOI":
+        index += 2
+        cnt += 1
+        if cnt == N:
+            ans += 1
+            cnt -= 1
+    else:
+        index += 1
+        cnt = 0
+
+print(ans)
 
 
 
