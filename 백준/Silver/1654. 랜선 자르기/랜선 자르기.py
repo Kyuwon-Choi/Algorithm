@@ -1,7 +1,7 @@
 import sys
-from bisect import bisect_left, bisect_right
 input = sys.stdin.readline
 
+#이진탐색 사용!
 
 num, N = map(int, input().split())
 
@@ -22,7 +22,3 @@ while minLen <= maxLen:
     else:
         maxLen=mid-1
 print(maxLen)
-
-
-
-
