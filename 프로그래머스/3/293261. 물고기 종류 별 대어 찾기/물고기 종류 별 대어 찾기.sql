@@ -1,0 +1,10 @@
+-- 코드를 작성해주세요
+SELECT i.ID, n.FISH_NAME, i.LENGTH
+FROM FISH_INFO AS i, FISH_NAME_INFO AS n
+WHERE i.FISH_TYPE = n.FISH_TYPE AND 
+(i.FISH_TYPE, i.LENGTH) IN (
+    SELECT FISH_TYPE, MAX(LENGTH)
+    FROM FISH_INFO
+    GROUP BY FISH_TYPE
+    -- 서브쿼리로 타입, 길이 group by 해서 max만 출력
+) 
