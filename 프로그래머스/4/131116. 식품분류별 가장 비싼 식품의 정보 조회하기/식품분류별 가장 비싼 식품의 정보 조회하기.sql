@@ -6,5 +6,5 @@ where (CATEGORY, PRICE) in (
     from FOOD_PRODUCT
     GROUP BY CATEGORY
 )
-and (CATEGORY ='과자' or CATEGORY ='국' or CATEGORY ='김치' or CATEGORY ='식용유')
+and CATEGORY in ('과자', '국', '김치', '식용유')
 order by MAX_PRICE desc
