@@ -1,5 +1,6 @@
 import sys
 from collections import deque
+import heapq
 
 input = sys.stdin.readline
 
@@ -8,29 +9,22 @@ arr=[]
 for _ in range(n):
     d, w=map(int, input().split())
     arr.append((d, w))
+
 arr.sort(key=lambda x:(-x[0], -x[1]))
-queue=deque(arr)
-day=queue[0][0]
+
+day=arr[0][0]
 ans=0
+heap =[]
+index=0
+
 for i in range(day, 0, -1):
-    queue2=deque([])
-    for j in queue:
-        if j[0]>=i:
-            if queue2:
-                if j[1]>queue2[0][1]:
-                    queue2.appendleft(j)
-                else:
-                    queue2.append(j)
-            else:
-                queue2.append(j)
-    if queue2:
-        ans+=queue2[0][1]
-        queue.remove(queue2[0])
+    while index<n and arr[index][0]>=i:
+        heapq.heappush(heap, -arr[index][1])
+        index+=1
+    if heap:
+        ans+=-(heapq.heappop(heap))
+
 print(ans)
-
-
-
-
 
 
 
