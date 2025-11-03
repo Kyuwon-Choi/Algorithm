@@ -1,33 +1,33 @@
 import sys
 from collections import deque
 import heapq
-
+sys.setrecursionlimit(10 ** 9)
 input = sys.stdin.readline
 
 m, n=map(int, input().split())
 graph=[]
 for _ in range(m):
     graph.append(list(map(int, input().split())))
-dp=[[0]*n for _ in range(m)]
+dp=[[-1]*n for _ in range(m)]
 dir=[(1,0), (0, 1), (-1, 0), (0, -1)]
-dp[0][0]=1
+global cnt
+cnt=0
 
-h_graph=[]
-for i in range(m):
-    for j in range(n):
-        h_graph.append((graph[i][j], i, j))
+def recur(x, y):
+    if x==m-1 and y==n-1:
+        return 1
+    if dp[x][y]!=-1:
+        return dp[x][y]
 
-h_graph.sort(key=lambda x: -x[0])
+    dp[x][y] = 0
 
-for h, x, y in h_graph:
+    cnt=0
     for dx, dy in dir:
-        nx, ny=x+dx, y+dy
-
-        if 0<=nx<m and 0<=ny<n:
-            if graph[x][y]>graph[nx][ny]:
-                dp[nx][ny]+=dp[x][y]
-print(dp[m-1][n-1])
-
+        if 0<=x+dx<m and 0<=y+dy<n:
+            if graph[x][y]>graph[x+dx][y+dy]:
+                cnt+=recur(x+dx, y+dy)
+    dp[x][y]=cnt
+    return dp[x][y]
 
 
-
+print(recur(0,0))
