@@ -7,7 +7,7 @@ class Solution {
 
         boolean[][] visited = new boolean[rows][cols];
 
-        Queue<int[]> q = new LinkedList<>();
+        Queue<int[]> q = new ArrayDeque<>();
 
         q.add(new int[]{0, 0, 1});
         visited[0][0] = true; 
@@ -32,12 +32,13 @@ class Solution {
                 if (cx >= 0 && cx < rows && cy >= 0 && cy < cols) {
                     if (!visited[cx][cy] && maps[cx][cy] == 1) {
                         visited[cx][cy] = true; 
-                        q.add(new int[]{cx, cy, dist + 1}); 
-                    }
+                        q.offer(new int[]{cx, cy, dist + 1}); 
+                
                 }
             }
         }
 
-        return -1;
+        
+    }return -1;
     }
 }
